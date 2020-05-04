@@ -4,7 +4,7 @@
 # freemarket_70c DB 設計
 
 
-## Usersテーブル
+## usersテーブル
 
 |Columm|Type|Options|
  |:------|:----|:-------|
@@ -36,7 +36,7 @@
  add_index: [:nickname, :e-mail]
 
 
- ## Addressesテーブル
+ ## addressesテーブル
  |colum|type|Opsion|
  |:------|:----|:-------|
  |family_name|string|null: false|
@@ -57,7 +57,7 @@
  add_index: [:prefecture, :user_id]
 
 
- ## Cardsテーブル
+ ## cardsテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
  |card_number|integer|null: false,|
@@ -72,7 +72,7 @@
  ## index
  add_index: [:user_id]
 
- ## Commentsテーブル
+ ## commentsテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
  |user_id|integer|null: false,foreign_key: true|
@@ -87,7 +87,7 @@
  add_index: [:user_id, :item_id]
 
 
- ## Itemsテーブル
+ ## itemsテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
  |user_id|integer|foreign_key: true|
@@ -114,7 +114,7 @@
  add_index: [:name, :price]
 
 
- ## Imagesテーブル
+ ## imagesテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
  |src|string|null: false|
@@ -124,7 +124,7 @@
  belongs_to :item
 
 
- ## Brandsテーブル
+ ## brandsテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
  |name|string|null: false|
@@ -136,7 +136,7 @@
  add_index: :name
 
 
- ## Categoriesテーブル
+ ## categoriesテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
  |name|string|null: false|
