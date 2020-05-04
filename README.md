@@ -1,63 +1,52 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-# freemarket_70 DB 設計
+# freemarket_70c DB 設計
 
 
 ## usersテーブル
 
 |Columm|Type|Options|
  |:------|:----|:-------|
- |name|string|null: ：false|
+ |family_name|string|null: false|
+ |first_name|string|null: false|
+ |family_name_kana|string|null: false|
+ |first_name_kana|string|null:false|
  |nickname|string|null: :false|
  |e-mail|string|null: ：false|
  |number|integer|null: :false|
- |password|string|null: :false|
+ |encrypted_password|string|null: :false|
+ |password_confirmation|string|null: false|
  |gender|integer|null: :false|
- |birthday|date|null: :false|
+ |birth_year|integer|null: false|
+ |birth_month|integer|null: false|
+ |birth_day|integer|null: false|
+ |introduction|text||
+ |user_image|string||
 
 
  ## Association
  has_many :cards
- has_many :addrresses
+ has_many :addresses
  has_many :items
  has_many :comments
 
 
  ## index
- add_index: [:nickname, :gender, :adress]
+ add_index: [:nickname, :e-mail]
 
 
  ## addressesテーブル
  |colum|type|Opsion|
  |:------|:----|:-------|
+ |family_name|string|null: false|
+ |first_name|string|null: false|
+ |family_name_kana|string|null: false|
+ |first_name_kana|string|null:false|
  |postal_code|string|null: false|
- |city|string|null: false|
+ |prefecture|string|null: false|
  |local|string|null: false|
+ |local_number|string|null: false|
  |buildig|string||
  |user_id|integer|null: false, foreign_key: true|
 
@@ -65,7 +54,7 @@ Things you may want to cover:
  belongs_to :user
 
  ## index
- add_index: :city
+ add_index: [:prefecture, :user_id]
 
 
  ## Cardsテーブル
@@ -80,13 +69,15 @@ Things you may want to cover:
  ## Association
  belongs_to :user
 
+ ## index
+ add_index: [:user_id]
 
  ## commentsテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
  |user_id|integer|null: false,foreign_key: true|
  |item_id|integer|null: false,foreign_key: true|
- |content|text|null: :false|
+ |text|text|null: :false|
 
  ## Association
  belongs_to :user
@@ -99,8 +90,9 @@ Things you may want to cover:
  ## itemsテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
+ |user_id|integer|foreign_key: true|
  |name|string|null:：false|
- |description|text||
+ |description|text|null: :false|
  |price|integer|null:：false|
  |buyer_id|integer||
  |size|string||
@@ -109,6 +101,7 @@ Things you may want to cover:
  |postage|integer|null: :false|
  |category_id|integer|null: :false, foregin_key: :true|
  |brand_id|integer|null: :false, foregin_key: :true|
+ |prefecture_id|integer|null: :false|
  
  ## Association
  belongs_to :user
@@ -124,7 +117,7 @@ Things you may want to cover:
  ## imagesテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
- |image|text|null: false|
+ |src|string|null: false|
  |item_id|integer|null: false, foreign_key: true|
 
  ## Association
@@ -147,9 +140,10 @@ Things you may want to cover:
  |Column|Type|Options|
  |:------|:----|:-------|
  |name|string|null: false|
+ |ancestry|string|
  
  ## Association
  has_many :items
 
  ## index
- add_index: [:gender, :name]
+ add_index: [:name]
