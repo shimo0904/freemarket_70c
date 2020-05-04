@@ -13,6 +13,18 @@ Things you may want to cover:
 
 * Database creation
 
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
 # freemarket_70 DB 設計
 
 
@@ -20,15 +32,13 @@ Things you may want to cover:
 
 |Columm|Type|Options|
  |:------|:----|:-------|
- |name|string|null:　：false|
+ |name|string|null: ：false|
  |nickname|string|null: :false|
- |e-mail|string|null:　：false|
+ |e-mail|string|null: ：false|
  |number|integer|null: :false|
  |password|string|null: :false|
- |adress|string|null: :false|
  |gender|integer|null: :false|
  |birthday|date|null: :false|
- |comment_id|integer|foreign_key: true|
 
 
  ## Association
@@ -94,16 +104,13 @@ Things you may want to cover:
  |description|text||
  |price|integer|null:：false|
  |buyer_id|integer||
- |brand_id|integer|foreign_key: true|
- |category_id|integer|null: faulse,foreign_key: true|
-
+ 
  ## Association
  belongs_to :user
  has_many :comments
  has_many :images
- has_many :item_category_brands
- has_many :brands, through: :item_category_brands
- has_many :categories, through: :item_category_brands
+ belongs_to :brand
+ belongs_to :category
 
  ## index
  add_index: [:name, :price]
@@ -112,12 +119,7 @@ Things you may want to cover:
  ## imagesテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
- |image1|text|null: false|
- |image2|text|
- |image3|text|
- |image4|text|
- |image5|text|
- |image6|text|
+ |image|text|null: false|
  |item_id|integer|null: false, foreign_key: true|
 
  ## Association
@@ -127,14 +129,11 @@ Things you may want to cover:
  ## Brandsテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
- |name|string|null: false,|
- |item_id|integer|null: false, foreign_key: true|
- |category_id|integer|null: false, foreign_key: true|
-
+ |name|string|null: false|
+ 
  ## Association
- has_many :item_category_brands
- has_many :items, through :item_category_brand
- has_many :categories, through :item_category_brand
+ has_many :items
+ has_many :categories
 
  ## index
  add_index: :name
@@ -145,41 +144,10 @@ Things you may want to cover:
  |:------|:----|:-------|
  |gender|string|null: false,|
  |name|string|null: false|
- |item_id|integer|null: false, foreign_key: true|
- |brand_id|integer|null: false, foreign_key: true|
-
+ 
  ## Association
- has_many :item_category_brands
- has_many :items , through :item_category_brand
- has_many :brands, through :item_category_brand
+ has_many :items
+ has_many :brands
 
  ## index
  add_index: [:gender, :name]
-
-
- ## item_category_brandテーブル
- |Column|Type|Options|
- |:------|:----|:-------|
- |item_id|integer|null: false,foreign_key: true|
- |category_id|integer|foreign_key: true|
- |brand_id|integer|foreign_key: true|
-
- ## Association
- belongs_to :item
- belongs_to :brand
- belongs_to :category
-
-
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-shimo0904
