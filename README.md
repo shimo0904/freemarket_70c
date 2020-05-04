@@ -42,11 +42,10 @@ Things you may want to cover:
 
 
  ## Association
- has_many :user_comments
  has_many :cards
- has_many :adrresses
+ has_many :addrresses
  has_many :items
- has_many :comments, through: :user_comment
+ has_many :comments
 
 
  ## index
@@ -104,6 +103,12 @@ Things you may want to cover:
  |description|text||
  |price|integer|null:：false|
  |buyer_id|integer||
+ |size|string||
+ |condition|string|null: :false|
+ |wait|string|null: :false|
+ |postage|integer|null: :false|
+ |category_id|integer|null: :false, foregin_key: :true|
+ |brand_id|integer|null: :false, foregin_key: :true|
  
  ## Association
  belongs_to :user
@@ -133,7 +138,6 @@ Things you may want to cover:
  
  ## Association
  has_many :items
- has_many :categories
 
  ## index
  add_index: :name
@@ -142,12 +146,10 @@ Things you may want to cover:
  ## Categoriesテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
- |gender|string|null: false,|
  |name|string|null: false|
  
  ## Association
  has_many :items
- has_many :brands
 
  ## index
  add_index: [:gender, :name]
