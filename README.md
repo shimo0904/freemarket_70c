@@ -26,9 +26,9 @@
 
 
  ## Association
- has_many :cards
- has_many :addresses
- has_many :items
+ has_one :card
+ has_one :addresse
+ has_many :items, dependent: :destroy
  has_many :comments
 
 
@@ -48,6 +48,7 @@
  |local|string|null: false|
  |local_number|string|null: false|
  |building|string||
+ |number|string||
  |user_id|integer|null: false, foreign_key: true|
 
  ## Association
@@ -63,7 +64,8 @@
  |card_number|integer|null: false,|
  |name|string|null: false|
  |CVC|integer|null: false|
- |limit_date|integer|null: false|
+ |limit_year|integer|null: false|
+ |limit_month|integer|mull: false|
  |user_id|integer|null: false, foreign_key: true|
 
  ## Association
@@ -106,9 +108,10 @@
  ## Association
  belongs_to :user
  has_many :comments
- has_many :images
+ has_many :images, dependent: :destroy
  belongs_to :brand
  belongs_to :category
+ belongs_to :prefecture
 
  ## index
  add_index: [:name, :price]
@@ -117,7 +120,7 @@
  ## imagesテーブル
  |Column|Type|Options|
  |:------|:----|:-------|
- |src|string|null: false|
+ |url|string|null: false|
  |item_id|integer|null: false, foreign_key: true|
 
  ## Association
@@ -133,7 +136,7 @@
  has_many :items
 
  ## index
- add_index: :name
+ add_index: [:name]
 
 
  ## categoriesテーブル
@@ -147,3 +150,12 @@
 
  ## index
  add_index: [:name]
+
+
+## prefecturesテーブル
+|Column|Type|Options|
+|:------|:----|:-------|
+|name|string|null: false|
+
+## Association
+has_many :items
