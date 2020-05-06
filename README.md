@@ -111,7 +111,6 @@
  has_many :images, dependent: :destroy
  belongs_to :brand
  belongs_to :category
- belongs_to :prefecture
 
  ## index
  add_index: [:name, :price]
@@ -150,12 +149,3 @@
 
  ## index
  add_index: [:name]
-
-
-## prefecturesテーブル
-|Column|Type|Options|
-|:------|:----|:-------|
-|name|string|null: false|
-
-## Association
-has_many :items
